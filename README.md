@@ -124,9 +124,6 @@ module add --name=org.postgres --resources=/opt/jdbc/postgresql-9.4-1205.jdbc42.
 
 # Add the datasource
 data-source add --name=PostgresDS --driver-name=postgres --jndi-name=java:jboss/datasources/PostgresDS --connection-url=jdbc:postgresql://postgres:5432/test --user-name=postgres --password=secret --use-ccm=true --max-pool-size=5 --blocking-timeout-wait-millis=5000 --enabled=true --driver-class=org.postgresql.Driver --exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter --jta=true --use-java-context=true --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
-
-# Execute the batch
-run-batch
 ```
  
 # Adding a user
