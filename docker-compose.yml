@@ -1,0 +1,24 @@
+
+wildfly:
+  build: ./wildfly
+  container_name: "wildfly"
+  ports:
+    - "8080:8080"
+    - "9990:9990"
+
+postgres:
+  image: postgres
+  container_name: "postgres"
+  volumes:
+    - "./postgres:/docker-entrypoint-initdb.d"
+  environment:
+    - "POSTGRES_PASSWORD=secret"
+
+# ActiveMQ:61616 => "admin":"adminactivemq"
+# ActiveMQWeb:8161 => "admin":"admin"
+activemq:
+  image: rmohr/activemq:5.10.0
+  container_name: "activemq"
+  ports:
+    - "61616:61616"
+    - "8161:8161"
