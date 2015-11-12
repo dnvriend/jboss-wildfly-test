@@ -103,28 +103,30 @@ Hierarchical classloading often causes several problems, mainly library conflict
 but this ended in WildFly thanks to its modular structure that only links the JAR file to your application when it needs it.
 
 # Installing a postgres datasource
-To install a postgres datasource we must first download and install the Postgres JDBC4.2 compatible driver. Wildfly makes
-this easy, you can just put the JDBC4 compatible driver in the deployments directory: 
+Installing a datasource consists of the following steps:
 
-```bash
-$ curl https://jdbc.postgresql.org/download/postgresql-9.4-1205.jdbc42.jar -O $JBOSS_HOME/standalone/deployments/postgresql-9.4-1205.jdbc42.jar
+- Packaging a JDBC4 compatible database driver,
+- Adding a module that will define the postgres driver, and the dependencies,
+- Adding a jdbc-driver definition that points to a module to use, and defines a the class names for the driver,
+- Adding a datasource configuration that contains all the connection specifics
+
+Using the `$JBOSS_HOME/bin/jboss-cli.sh` script, that can execute commands from a file, these steps can be executed
+when building the docker image. With the `execute.sh` script I copied from [Marek Goldmann's wildfly docker configuration](https://github.com/goldmann/wildfly-docker-configuration) project,
+it will launch Wildfly and then configure it when building the docker image. Below is an example of such a commands script.
+
+
 ```
+# Add a module that contains the Postgres driver
+module add --name=org.postgres --resources=/opt/jdbc/postgresql-9.4-1205.jdbc42.jar --dependencies=javax.api,javax.transaction.api
 
-You will see the following logging:
+# Add postgres driver
+/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
 
-```bash
-20:53:24,180 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) WFLYSRV0027: Starting deployment of "postgresql-9.4-1205.jdbc42.jar" (runtime-name: "postgresql-9.4-1205.jdbc42.jar")
-20:53:25,290 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class org.postgresql.Driver (version 9.4)
-20:53:25,310 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-2) WFLYJCA0018: Started Driver service with driver-name = postgresql-9.4-1205.jdbc42.jar
-20:53:25,442 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 2) WFLYSRV0010: Deployed "postgresql-9.4-1205.jdbc42.jar" (runtime-name : "postgresql-9.4-1205.jdbc42.jar")
-```
+# Add the datasource
+data-source add --name=PostgresDS --driver-name=postgres --jndi-name=java:jboss/datasources/PostgresDS --connection-url=jdbc:postgresql://postgres:5432/test --user-name=postgres --password=secret --use-ccm=true --max-pool-size=5 --blocking-timeout-wait-millis=5000 --enabled=true --driver-class=org.postgresql.Driver --exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter --jta=true --use-java-context=true --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
 
-You can now query the application server:
-
-```bash
-$ cd $JBOSS_HOME/bin
-$ ./jboss-cli.sh --connect
-[standalone@localhost:9990 /] 
+# Execute the batch
+run-batch
 ```
  
 # Adding a user
