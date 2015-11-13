@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "==================     Help for psql    ========================="
+echo "\l or \list            : shows all databases"
+echo "\dt                    : shows all tables in the current database"
+echo "\d table_name          : describe table, view, sequence, or index"
+echo "\connect database_name : switch to a database"
+echo "\q                     : quit"
+echo "\?                     : for more commands"
+echo "====================    Some SQL    ============================="
+echo "SHOW SERVER_VERSION;      : returns the server version"
+echo "select gen_random_uuid(); : returns a random uuid"
+echo "====================    Extensions    ==========================="
+echo "CREATE EXTENSION pgcrypto; : installs cryptographic functions"
+echo "================================================================="
+docker exec -it postgres psql -U postgres

@@ -18,6 +18,7 @@ package repository
 
 import java.sql._
 import java.text.SimpleDateFormat
+import java.util.UUID
 import javax.sql.DataSource
 import scala.util.{ Failure, Success, Try }
 import scala.concurrent._
@@ -102,6 +103,12 @@ object JdbcConnection {
     def bool(index: Int): Boolean = row(index).asInstanceOf[Boolean]
     def boolOpt(name: String): Option[Boolean] = Try(bool(name)).toOption
     def boolOpt(index: Int): Option[Boolean] = Try(bool(index)).toOption
+    def uuid(name: String): UUID = row(name).asInstanceOf[UUID]
+    def uuid(index: Int): UUID = row(index).asInstanceOf[UUID]
+    def uuidOpt(name: String): Option[UUID] = Try(uuid(name)).toOption
+    def uuidOpt(index: Int): Option[UUID] = Try(uuid(index)).toOption
+    def uuidStr(name: String): String = uuid(name).toString
+    def uuidStr(index: Int): String = uuid(index).toString
   }
 
   //
@@ -219,6 +226,12 @@ trait JdbcConnection {
 
   def mapQuery[A](interpolation: SqlAndArgs)(implicit rowMapper: ResultSet ⇒ A): Try[Seq[A]] =
     queryForList(interpolation)
+
+  def executeQueryId[A](interpolation: SqlAndArgs)(implicit rowMapper: ResultSet ⇒ A): Try[A] =
+    executeQuery(interpolation.sql, interpolation.args).map { rs ⇒
+      rs.next()
+      rowMapper(rs)
+    }
 
   private def withValueInsertion(values: Seq[Any], preparedStatement: PreparedStatement): PreparedStatement = {
     values.zipWithIndex.map(t ⇒ (t._1, t._2 + 1)).foreach {

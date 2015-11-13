@@ -5,7 +5,7 @@ FROM jboss/wildfly
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
 ADD jdbc /opt/jdbc
-
+ADD activemq-rar /opt/activemq-rar
 ADD config /opt/config
 
 USER root

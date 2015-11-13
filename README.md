@@ -73,11 +73,9 @@ See [wikipedia](https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition#
 # Scripts for everyday use
 The `$JBOSS_HOME/bin` directory contains the following scripts for everyday use:
 
-- __add-user.sh__: used to create an application or management user. 
-- __domain.sh__: the domain mode startup script
-- __domain.conf__: the boot configuration file that is used by domain.sh to set the boot parameters
+- __jboss-cli.sh__: used to configure Wildfly
+- __add-user.sh__: used to create an application or management user 
 - __standalone.sh__: the standalone mode startup script
-- __standalone.conf__: the startup configuration file that is used by standalone.sh to set the boot parameters
 
 # Configurating the application server
 WildFly has all your settings centralized in a single file that is divided into subsystems that can be changed according 
@@ -151,7 +149,7 @@ $ ./add-user.sh foo 123
 ```
  
 You can also type `add-user.sh` without any options to guide you through the process adding a user.  
- 
+  
 # Application and management ports
 Wildfy only has has two ports in use, an `application` port, which is `8080` and a `management` port, which is `9990`.
 The `application` port is used for HTTP (servlet, JAX-RS, JAX-WS), Web Sockets, HTTP Upgraded Remoting (EJB Invocation, Remote JNDI). 
@@ -162,6 +160,17 @@ This means that you have the following two urls to deal with:
 - __Application__: http://boot2docker:8080
 - __Management__: http://boot2docker:9990/console
 
+# Resource Adapter
+RAR (Resource Adapter Archive): is an archive that is defined in the [Java EE Connector Architecture (JCA) specification](https://www.jcp.org/en/jsr/detail?id=322) 
+as the valid format for deployment of resource adapters on application servers. You can deploy a RAR on the AS as a 
+standalone component or as part of a larger application. In both cases, the adapter is available to all applications 
+using a lookup procedure.
+
+[JCA](https://en.wikipedia.org/wiki/Java_EE_Connector_Architecture) is a Java-based technology solution for connecting 
+application servers and enterprise information systems (EIS) as part of enterprise application integration (EAI) solutions. 
+While JDBC is specifically used to connect Java EE applications to databases, JCA is a more generic architecture for 
+connection to legacy systems.
+
 # Logging
 https://goldmann.pl/blog/2014/07/18/logging-with-the-wildfly-docker-image/
 
@@ -169,3 +178,6 @@ https://goldmann.pl/blog/2014/07/18/logging-with-the-wildfly-docker-image/
 https://docs.jboss.org/author/display/WFLY8/Application+deployment
 http://tools.jboss.org/blog/2015-03-02-getting-started-with-docker-and-wildfly.html
 https://goldmann.pl/blog/2014/07/23/customizing-the-configuration-of-the-wildfly-docker-image/#_using_code_jboss_cli_sh_code
+
+# Postgres
+https://blog.starkandwayne.com/2015/05/23/uuid-primary-keys-in-postgresql/

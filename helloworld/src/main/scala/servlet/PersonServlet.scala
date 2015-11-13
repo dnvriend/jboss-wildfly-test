@@ -57,10 +57,9 @@ class PersonServlet extends HttpServlet {
     val lastNameOption = Option(request.getParameter("lastName"))
     (firstNameOption, lastNameOption) match {
       case (Some(firstName), Some(lastName)) ⇒
-        val person = Person(UUID.randomUUID().toString, firstName, lastName)
-        PersonRepository.savePerson(person)
+        PersonRepository.savePerson(firstName, lastName)
           .map { _ ⇒
-            out.println("Saved person: " + person)
+            out.println(s"Person saved")
           }
           .recover {
             case t: Throwable ⇒
