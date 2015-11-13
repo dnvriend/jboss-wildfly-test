@@ -7,4 +7,3 @@
 /helloworld/deployments/*.rar
 /helloworld/deployments/*.undeployed
 /helloworld/deployments/*.deployed
-/wildfly/amq/
