@@ -36,6 +36,7 @@ class RequestHeaderServlet extends HttpServlet {
     }
     out.close()
   }
+
   override def doPost(req: HttpServletRequest, resp: HttpServletResponse): Unit =
     doGet(req, resp)
 }
