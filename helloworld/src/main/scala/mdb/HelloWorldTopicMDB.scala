@@ -21,7 +21,7 @@ import javax.jms.{ MessageListener, Message, TextMessage }
 import javax.ejb.{ MessageDriven, ActivationConfigProperty }
 
 @MessageDriven(name = "HelloWorldTopicMDB", activationConfig = Array(
-  new ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "topic/HELLOWORLDMDBTopic"),
+  new ActivationConfigProperty(propertyName = "destination", propertyValue = "HELLOWORLDMDBTopic"),
   new ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
   new ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
 ))

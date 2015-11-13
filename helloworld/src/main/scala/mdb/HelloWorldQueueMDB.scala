@@ -21,7 +21,7 @@ import javax.jms.{ MessageListener, Message, TextMessage }
 import javax.ejb.{ MessageDriven, ActivationConfigProperty }
 
 @MessageDriven(name = "HelloWorldQueueMDB", activationConfig = Array(
-  new ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/HELLOWORLDMDBQueue"),
+  new ActivationConfigProperty(propertyName = "destination", propertyValue = "HELLOWORLDMDBQueue"),
   new ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
   new ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
 ))
