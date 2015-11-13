@@ -1,15 +1,2 @@
-#!/bin/bash
-
-echo "******CREATING DATABASES AND TABLES******"
-gosu postgres postgres --single <<- EOSQL
- CREATE DATABASE test;
- GRANT ALL PRIVILEGES ON DATABASE test to postgres;
-EOSQL
-
-gosu postgres postgres --single test <<- EOSQL
-   ALTER TABLE persons OWNER TO postgres;
-EOSQL
-
-echo ""
-echo "******DATABASES AND TABLES CREATED******"
-
+CREATE TABLE IF NOT EXISTS persons ( ID CHAR(36) NOT NULL PRIMARY KEY, FIRST_NAME VARCHAR(255), LAST_NAME VARCHAR(255), CREATED TIMESTAMP NOT NULL );
+ALTER TABLE persons OWNER TO postgres;

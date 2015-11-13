@@ -114,7 +114,7 @@ Using the `$JBOSS_HOME/bin/jboss-cli.sh` script, that can execute commands from 
 when building the docker image. With the `execute.sh` script I copied from [Marek Goldmann's wildfly docker configuration](https://github.com/goldmann/wildfly-docker-configuration) project,
 it will launch Wildfly and then configure it when building the docker image. Below is an example of such a commands script.
 
-
+Also see: [this](https://github.com/wildfly/quickstart/blob/d33768c2a2211f03c5d80d7c39e66ea82cba3d68/configure-postgresql.cli)
 ```
 # Add a module that contains the Postgres driver
 module add --name=org.postgres --resources=/opt/jdbc/postgresql-9.4-1205.jdbc42.jar --dependencies=javax.api,javax.transaction.api
@@ -126,6 +126,8 @@ module add --name=org.postgres --resources=/opt/jdbc/postgresql-9.4-1205.jdbc42.
 data-source add --name=PostgresDS --driver-name=postgres --jndi-name=java:jboss/datasources/PostgresDS --connection-url=jdbc:postgresql://postgres:5432/test --user-name=postgres --password=secret --use-ccm=true --max-pool-size=5 --blocking-timeout-wait-millis=5000 --enabled=true --driver-class=org.postgresql.Driver --exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter --jta=true --use-java-context=true --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker
 ```
  
+You could also read [this](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_EAP7.md#configure-the-postgresql-database-for-use-with-the-quickstarts) explanation.
+
 # Adding a user
 By default WildFly is distributed with security enabled for the management interfaces, this means that before you connect 
 using the administration console or remotely using the CLI you will need to add a new user, this can be achieved simply 
