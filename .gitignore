@@ -7,4 +7,4 @@
 /helloworld/deployments/*.rar
 /helloworld/deployments/*.undeployed
 /helloworld/deployments/*.deployed
-/wildfly/activemq-rar/
+/wildfly/amq/

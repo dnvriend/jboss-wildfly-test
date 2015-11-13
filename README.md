@@ -171,6 +171,8 @@ application servers and enterprise information systems (EIS) as part of enterpri
 While JDBC is specifically used to connect Java EE applications to databases, JCA is a more generic architecture for 
 connection to legacy systems.
 
+http://repo1.maven.org/maven2/org/apache/activemq/activemq-rar/5.10.0/
+
 # Logging
 https://goldmann.pl/blog/2014/07/18/logging-with-the-wildfly-docker-image/
 
@@ -181,3 +183,10 @@ https://goldmann.pl/blog/2014/07/23/customizing-the-configuration-of-the-wildfly
 
 # Postgres
 https://blog.starkandwayne.com/2015/05/23/uuid-primary-keys-in-postgresql/
+
+# ActiveMQ
+https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/6/html/Administration_and_Configuration_Guide/Configure_a_Deployed_Resource_Adapter1.html
+http://repo1.maven.org/maven2/org/apache/activemq/activemq-rar/5.10.0/
+https://developer.jboss.org/wiki/HowToUseOutOfProcessActiveMQWithWildFly
+https://developer.jboss.org/message/883239
+http://www.mastertheboss.com/jboss-server/jboss-script/installing-a-jboss-as-7-module-using-the-cli

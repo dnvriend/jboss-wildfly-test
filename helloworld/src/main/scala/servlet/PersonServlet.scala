@@ -16,14 +16,12 @@
 
 package servlet
 
-import java.util.UUID
 import javax.annotation.Resource
 import javax.servlet.annotation._
 import javax.servlet.http._
 import javax.sql.DataSource
 
-import repository.PersonRepository.Person
-import repository.{ PersonRepository, JdbcConnection }
+import repository.{ JdbcConnection, PersonRepository }
 
 @WebServlet(value = Array("/PersonServlet"))
 class PersonServlet extends HttpServlet {

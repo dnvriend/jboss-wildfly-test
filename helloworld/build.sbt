@@ -7,7 +7,7 @@ version := "1.0"
 scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
-  "javax.servlet" % "javax.servlet-api" % "3.0.1" % "provided",
+  "javax" % "javaee-api" % "7.0" % "provided",
   "com.jsuereth" %% "scala-arm" % "1.4",
   "com.typesafe.akka" %% "akka-actor" % "2.3.11",
   "com.typesafe.akka" %% "akka-testkit" % "2.3.11" % "test",

@@ -7,8 +7,10 @@
 
 JBOSS_HOME=/opt/jboss/wildfly
 JBOSS_CLI=$JBOSS_HOME/bin/jboss-cli.sh
-JBOSS_MODE=${1:-"standalone"}
-JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
+# It doesn't contains support for messaging,Jacorb, CMP (java EE web profile)
+#JBOSS_PROFILE=standalone.xml
+# It contains support like messaging,Jacorb, CMP (java EE full EE stack profile)
+JBOSS_PROFILE=standalone-full.xml
 
 function wait_for_server() {
   until `$JBOSS_CLI -c "ls /deployment" &> /dev/null`; do
@@ -17,17 +19,13 @@ function wait_for_server() {
 }
 
 echo "=> Starting WildFly server"
-$JBOSS_HOME/bin/$JBOSS_MODE.sh -c $JBOSS_CONFIG > /dev/null &
+$JBOSS_HOME/bin/standalone.sh -c $JBOSS_PROFILE > /dev/null &
 
 echo "=> Waiting for the server to boot"
 wait_for_server
 
-echo "=> Executing the commands"
-$JBOSS_CLI -c --file=/opt/config/commands.cli
+echo "=> Executing the commands: $1"
+$JBOSS_CLI -c --file=/opt/config/$1
 
 echo "=> Shutting down WildFly"
-if [ "$JBOSS_MODE" = "standalone" ]; then
-  $JBOSS_CLI -c ":shutdown"
-else
-  $JBOSS_CLI -c "/host=*:shutdown"
-fi
+$JBOSS_CLI -c ":shutdown"
