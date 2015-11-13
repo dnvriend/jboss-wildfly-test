@@ -2,4 +2,6 @@
 /helloworld/target/
 /helloworld/project/project/
 /helloworld/project/target/
-/helloworld/deployments/
+/helloworld/deployments/*.war
+/helloworld/deployments/*.jar
+/helloworld/deployments/*.rar
