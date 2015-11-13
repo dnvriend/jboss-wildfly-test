@@ -5,6 +5,8 @@ wildfly:
   ports:
     - "8080:8080"
     - "9990:9990"
+  volumes:
+    - "./helloworld/deployments:/opt/jboss/wildfly/standalone/deployments"
 
 postgres:
   image: postgres
