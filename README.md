@@ -218,6 +218,7 @@ http://repo1.maven.org/maven2/org/apache/activemq/activemq-rar/5.10.0/
 
 # Logging
 https://goldmann.pl/blog/2014/07/18/logging-with-the-wildfly-docker-image/
+https://docs.jboss.org/author/display/WFLY9/How+To
 
 # Application deployment
 https://docs.jboss.org/author/display/WFLY8/Application+deployment
