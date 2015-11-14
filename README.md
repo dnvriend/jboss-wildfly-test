@@ -34,7 +34,7 @@ has the following [directory structure](https://docs.jboss.org/author/display/WF
  welcome pages, or error messages that are present in this directory.
  
 # Two modes of operation
-WildFly has two modes of operation: `standalone` and `domain`. The main difference between the two modes is scalability. 
+[WildFly](http://wildfly.org/) has two modes of operation: `standalone` and `domain`. The main difference between the two modes is scalability. 
 The standalone mode works alone and the domain mode works with one or more servers (cluster mode). By default, the docker
 container will launch the `standalone` mode using the script `$JBOSS_HOME/bin/standalone.sh`, but you can override
 this behavior by changing the `wildfly/Dockerfile` description.
@@ -78,9 +78,26 @@ The `$JBOSS_HOME/bin` directory contains the following scripts for everyday use:
 - __standalone.sh__: the standalone mode startup script
 
 # Configurating the application server
-WildFly has all your settings centralized in a single file that is divided into subsystems that can be changed according 
+[WildFly](http://wildfly.org/) has all your settings centralized in a single file that is divided into subsystems that can be changed according 
 to your needs. All management features are exposed through a Command Line Interface a web management interface, a native Java API, 
 and through the Rest API-based HTTP / JSON and JMX.
+
+# Wildfly configurations
+[WildFly](http://wildfly.org/) 8 is the latest release in a series of JBoss open-source application server offerings. 
+WildFly 8 is an exceptionally fast, lightweight and powerful implementation of the 
+[Java Platform, Enterprise Edition 7 specification](http://docs.oracle.com/javaee/7/index.html). 
+
+The state-of-the-art architecture built on the Modular Service Container enables services on-demand when your application 
+requires them. The table on [this](https://docs.jboss.org/author/display/WFLY9/Getting+Started+Guide) page lists the 
+Java Enterprise Edition 7 technologies and the technologies available in Wildfly 8 server configuration profiles:
+
+- __standalone.xml (default)__: Java Enterprise Edition 7 web profile certified configuration with the required 
+ technologies. 
+- __standalone-ha.xml__: Java Enterprise Edition 7 web profile certified configuration with high availability
+- __standalone-full.xml__: Java Enterprise Edition 7 full profile certified configuration including all the required EE 7 technologies
+- __standalone-full-ha.xml__: Java Enterprise Edition 7 full profile certified configuration with high availability
+ 
+> __Note__: The WildFly Web Profile doesn't include JMS (provided by HornetQ) by default, and the JMS module APIs in the runtime. If you want to use messaging, make sure you start the server using the "Full Profile" configuration (*-full.xml). 
  
 ## Command-Line Interface
 The `$JBOSS_HOME/bin/jboss-cli.sh` script is used to configure Wildfly. To connect to the application server type:
@@ -96,9 +113,35 @@ $ cd $JBOSS_HOME/bin
 Once connected you can add, modify, remove resources and deploy or undeploy applications. It is also possible to
 put all the commands you wish to execute in a file and run all commands (one command per line) sequentially.
 
-# Modular 
-Hierarchical classloading often causes several problems, mainly library conflicts between different versions of the same library, 
-but this ended in WildFly thanks to its modular structure that only links the JAR file to your application when it needs it.
+# JBoss Modules (Modular Classloading) 
+[JBoss Modules](https://docs.jboss.org/author/display/MODULES/Introduction) is a standalone implementation of a modular 
+(non-hierarchical) class loading and execution environment for Java. In other words, rather than a single class loader which 
+loads all JARs into a flat class path, each library becomes a module which only links against the exact modules it depends on, 
+and nothing more. It implements a thread-safe, fast, and highly concurrent delegating class loader model, coupled to an 
+extensible module resolution system, which combine to form a unique, simple and powerful system for application execution 
+and distribution.
+
+[JBoss Modules](https://docs.jboss.org/author/display/MODULES/Introduction) is designed to work with any existing library 
+or application without changes, and its simple naming and resolution strategy is what makes that possible. Unlike OSGi, 
+JBoss Modules does not implement a container; rather, it is a thin bootstrap wrapper for executing an application in a modular 
+environment. The moment your application takes control, the modular environment is ready to load and link modules as needed. 
+Furthermore, modules are never loaded (not even for resolution purposes) until required by a dependency, meaning that the 
+performance of a modular application depends only on the number of modules actually used (and when they are used), 
+rather than the total number of modules in the system. And, they may be unloaded by the user at any time.
+
+Since module definition is essentially pluggable, a module can be defined in many different ways.  However, JBoss Modules 
+ships with two basic implemented strategies which are most commonly utilized.
+
+## Defining a module
+The `first strategy` is the `static filesystem repository` approach. Modules are organized in a directory hierarchy on the 
+filesystem which is derived from the name and version of the module. The content of the module's specific directory is 
+comprised of a simple module descriptor and all of the content itself (JARs or loose files).
+
+The `second strategy` is designed for `direct JAR execution`. It uses JAR MANIFEST.MF information to define simple dependencies 
+and other module information, and is designed for executing JARs from the command line as well as situations where a JAR 
+may be deployed in a container such as the JBoss Application Server.
+
+For more information, please read [JBoss Modules - Module Descriptors](https://docs.jboss.org/author/display/MODULES/Module+descriptors)
 
 # Installing a postgres datasource
 Installing a datasource consists of the following steps:

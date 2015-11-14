@@ -1,4 +1,4 @@
-FROM jboss/wildfly
+FROM jboss/wildfly:9.0.2.Final
 
 # adds a management user with the following credentials: admin:admin
 # if you want to add an application user, use the '-a' option
