@@ -1,5 +1,5 @@
 # jboss-wildfly-test
-This is a study project into [WildFly](http://wildfly.org/), formerly known as JBoss AS, an application server developed by Red Hat. 
+This is a study project on [WildFly](http://wildfly.org/), formerly known as JBoss AS, an application server developed by Red Hat. 
 [WildFly](https://en.wikipedia.org/wiki/WildFly) is written in Java, and implements the [Java Platform, Enterprise Edition 7 specification](http://docs.oracle.com/javaee/7/index.html).
  
 This study project will focus on some aspects of the application server, notably, new features, configuration and management of 
