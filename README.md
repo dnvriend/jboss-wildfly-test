@@ -234,3 +234,8 @@ http://repo1.maven.org/maven2/org/apache/activemq/activemq-rar/5.10.0/
 https://developer.jboss.org/wiki/HowToUseOutOfProcessActiveMQWithWildFly
 https://developer.jboss.org/message/883239
 http://www.mastertheboss.com/jboss-server/jboss-script/installing-a-jboss-as-7-module-using-the-cli
+
+# Security Domains
+In WildFly, [security domains no longer use the prefix](https://docs.jboss.org/author/display/WFLY8/How+do+I+migrate+my+application+from+AS5+or+AS6+to+WildFly) `java:/jaas/` in their names. Remove this prefix from the security domain configurations in `jboss-web.xml` for web applications and `jboss.xml` for enterprise applications.
+
+
