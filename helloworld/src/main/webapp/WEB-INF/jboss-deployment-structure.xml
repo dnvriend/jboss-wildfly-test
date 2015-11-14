@@ -2,7 +2,6 @@
 <jboss-deployment-structure>
     <deployment>
         <dependencies>
-            <module name="javax.jms.api" slot="main" export="true"/>
         </dependencies>
     </deployment>
 </jboss-deployment-structure>

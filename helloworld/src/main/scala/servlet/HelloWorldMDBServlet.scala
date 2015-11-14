@@ -21,6 +21,12 @@ import javax.jms._
 import javax.servlet.annotation._
 import javax.servlet.http._
 
+/**
+ * Please note that ActiveMQ only supports JMS 1.1 API, so this servlet only uses
+ * the JMS 1.1 API and not the newer 2.0 API
+ *
+ * see: https://developer.jboss.org/wiki/HowToUseOutOfProcessActiveMQWithWildFly
+ */
 @WebServlet(value = Array("/HelloWorldMDBServlet"))
 class HelloWorldMDBServlet extends HttpServlet {
 
