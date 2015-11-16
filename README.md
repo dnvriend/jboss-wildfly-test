@@ -238,4 +238,6 @@ http://www.mastertheboss.com/jboss-server/jboss-script/installing-a-jboss-as-7-m
 # Security Domains
 In WildFly, [security domains no longer use the prefix](https://docs.jboss.org/author/display/WFLY8/How+do+I+migrate+my+application+from+AS5+or+AS6+to+WildFly) `java:/jaas/` in their names. Remove this prefix from the security domain configurations in `jboss-web.xml` for web applications and `jboss.xml` for enterprise applications.
 
+# Class loading in Wildfly (jboss-deployment-structure)
+Classloading can be set by using the `jboss-deployment-structure.xml` as can be read [here](https://docs.jboss.org/author/display/WFLY9/Class+Loading+in+WildFly)
 
